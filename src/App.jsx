@@ -208,59 +208,6 @@ const DeliveryModal = ({ onClose }) => {
   );
 };
 
-// --- COMPONENT: COUNTDOWN ---
-const Countdown = () => {
-  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
-
-  function calculateTimeLeft() {
-    const year = new Date().getFullYear();
-    let target = new Date(year, 11, 5);
-    const now = new Date();
-
-    if (now > target) {
-      target = new Date(year + 1, 11, 5);
-    }
-
-    const difference = +target - +now;
-
-    if (difference > 0) {
-      return {
-        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-        minutes: Math.floor((difference / 1000 / 60) % 60),
-        seconds: Math.floor((difference / 1000) % 60),
-      };
-    }
-    return "BDAY";
-  }
-
-  useEffect(() => {
-    const timer = setTimeout(() => setTimeLeft(calculateTimeLeft()), 1000);
-    return () => clearTimeout(timer);
-  });
-
-  if (timeLeft === "BDAY") {
-    return (
-      <div className="bday-banner-text">
-        <h2>🎉 IT'S TODAY! 🎉</h2>
-      </div>
-    );
-  }
-
-  return (
-    <div className="countdown-container">
-      {Object.entries(timeLeft).map(([unit, value]) => (
-        <div key={unit} className="countdown-item">
-          <span className="countdown-number">
-            {value.toString().padStart(2, "0")}
-          </span>
-          <span className="countdown-label">{unit}</span>
-        </div>
-      ))}
-    </div>
-  );
-};
-
 // --- COMPONENT: CATEGORY CARD ---
 const CategoryCard = ({ setKey, config, stickersToDecorate }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -403,16 +350,6 @@ export default function App() {
         .main-title { font-family: 'Fredoka', sans-serif; font-size: 2.5rem; color: white; text-shadow: 0 4px 10px rgba(0,0,0,0.5); margin: 0 0 1rem 0; }
         .subtitle { color: rgba(255,255,255,0.95); font-size: 1.1rem; margin-bottom: 1.5rem; }
 
-        /* --- COUNTDOWN --- */
-        .countdown-container { display: flex; gap: 15px; }
-        .countdown-item { display: flex; flex-direction: column; align-items: center; }
-        .countdown-number {
-            font-family: 'Fredoka', sans-serif; font-size: 1.5rem; background: white;
-            padding: 10px; border-radius: 10px; min-width: 50px; text-align: center;
-            color: #ec4899; box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        }
-        .countdown-label { font-size: 0.7rem; text-transform: uppercase; margin-top: 5px; letter-spacing: 1px; color: white; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
-
         /* --- GRID --- */
         .main-grid {
           display: grid;
@@ -521,8 +458,7 @@ export default function App() {
           <img src="images/Set 5.png" alt="Header" className="banner-img" />
           <div className="banner-overlay">
             <h1 className="main-title">Happy 22nd Birthday Arya!</h1>
-            <p className="subtitle">Counting down to your special day...</p>
-            <Countdown />
+            <p className="subtitle">Celebrating your special day!</p>
           </div>
         </div>
 
