@@ -4,5 +4,5 @@ import react from '@vitejs/plugin-react'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: "/oh-whats-this/", // <--- THIS LINE IS CRITICAL
+  base: "/oh-whats-this/", // <--- This is the Critical Fix
 })
