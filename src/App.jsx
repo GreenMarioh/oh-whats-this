@@ -6,7 +6,7 @@ import { Heart, Zap, Star, ChevronDown, ChevronUp, Music, BarChart2, Pause, Gift
 const STICKER_SETS = {
   set1: {
     id: 'set1',
-    url: '/images/Set 1.png',
+    url: 'images/Set 1.png',
     rows: 4,
     cols: 4,
     count: 16,
@@ -18,7 +18,7 @@ const STICKER_SETS = {
   },
   set2: {
     id: 'set2',
-    url: '/images/Set 2.png',
+    url: 'images/Set 2.png',
     rows: 4,
     cols: 4,
     count: 16,
@@ -30,7 +30,7 @@ const STICKER_SETS = {
   },
   set3: {
     id: 'set3',
-    url: '/images/Set 3.png',
+    url: 'images/Set 3.png',
     rows: 3,
     cols: 4,
     count: 12,
@@ -42,7 +42,7 @@ const STICKER_SETS = {
   },
   set4: {
     id: 'set4',
-    url: '/images/Set 4.png',
+    url: 'images/Set 4.png',
     rows: 3,
     cols: 3,
     count: 9,
@@ -111,8 +111,8 @@ const SpotifyRewind = () => {
             <div className="spotify-player">
               <Pause fill="white" stroke="none" size={20} />
               <div className="spotify-track-info">
-                 <span>Love and Yap<break></break></span>
-                 <span style={{fontSize:'10px', color:'#b3b3b3'}}><break></break>Arya • Mohnish's Phone</span>
+                 <span>Love and Yap<br></br></span>
+                 <span style={{fontSize:'10px', color:'#b3b3b3'}}><br/>Arya • Mohnish's Phone</span>
               </div>
               <div className="spotify-progress-bar">
                   <div className="spotify-progress-fill"></div>
@@ -466,7 +466,7 @@ export default function App() {
       <div className="content-container">
         
         <div className="banner-container">
-            <img src="/images/Set 5.png" alt="Header" className="banner-img" />
+            <img src="images/Set 5.png" alt="Header" className="banner-img" />
             <div className="banner-overlay">
                 <h1 className="main-title">Happy 23rd Birthday Arya!</h1>
                 <p className="subtitle">Counting down to your special day...</p>
