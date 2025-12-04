@@ -1,57 +1,72 @@
-import React, { useState, useEffect } from 'react';
-import Confetti from 'react-confetti';
-import { Heart, Zap, Star, ChevronDown, ChevronUp, Music, BarChart2, Pause, Gift, Camera, Truck, Package, CheckCircle, X } from 'lucide-react';
+import React, { useState, useEffect } from "react";
+import Confetti from "react-confetti";
+import {
+  Heart,
+  Zap,
+  Star,
+  ChevronDown,
+  ChevronUp,
+  Music,
+  BarChart2,
+  Pause,
+  Gift,
+  Camera,
+  Truck,
+  Package,
+  CheckCircle,
+  X,
+} from "lucide-react";
 
 // --- CONFIGURATION ---
 const STICKER_SETS = {
   set1: {
-    id: 'set1',
-    url: 'images/Set 1.png',
+    id: "set1",
+    url: "images/Set 1.png",
     rows: 4,
     cols: 4,
     count: 16,
     title: "The Many Moods of Arya",
     desc: "Her.",
-    color: '#be185d', // Deep Pink
-    bgColor: '#fce7f3', // Light Pink
-    icon: <Star size={24} />
+    color: "#be185d", // Deep Pink
+    bgColor: "#fce7f3", // Light Pink
+    icon: <Star size={24} />,
   },
   set2: {
-    id: 'set2',
-    url: 'images/Set 2.png',
+    id: "set2",
+    url: "images/Set 2.png",
     rows: 4,
     cols: 4,
     count: 16,
     title: "Us Against The World",
     desc: "Every moment with you is magic.",
-    color: '#1e40af', // Deep Blue
-    bgColor: '#dbeafe', // Light Blue
-    icon: <Heart size={24} />
+    color: "#1e40af", // Deep Blue
+    bgColor: "#dbeafe", // Light Blue
+    icon: <Heart size={24} />,
   },
   set3: {
-    id: 'set3',
-    url: 'images/Set 3.png',
+    id: "set3",
+    url: "images/Set 3.png",
     rows: 3,
     cols: 4,
     count: 12,
     title: "Danger Zone",
     desc: "The spicy side.",
-    color: '#9a3412', // Deep Orange
-    bgColor: '#ffedd5', // Light Orange
-    icon: <Zap size={24} />
+    color: "#9a3412", // Deep Orange
+    bgColor: "#ffedd5", // Light Orange
+    icon: <Zap size={24} />,
   },
   set4: {
-    id: 'set4',
-    url: 'images/Set 4.png',
+    id: "set4",
+    url: "images/Set 4.png",
     rows: 3,
     cols: 3,
     count: 9,
     title: "Core Memories",
     desc: "Snapshots of our favorite days.",
-    color: '#3730a3', // Deep Indigo
-    bgColor: '#e0e7ff', // Light Indigo
-    icon: <Camera size={24} />
-  }
+    color: "#3730a3", // Deep Indigo
+    bgColor: "#e0e7ff", // Light Indigo
+    icon: <Camera size={24} />,
+  },
 };
 
 // --- COMPONENT: STICKER ---
@@ -61,20 +76,20 @@ const Sticker = ({ setKey, index, className = "", style = {} }) => {
 
   const row = Math.floor(index / set.cols);
   const col = index % set.cols;
-  
+
   const xPos = (col / (set.cols - 1)) * 100;
   const yPos = (row / (set.rows - 1)) * 100;
   const sizeX = set.cols * 100;
   const sizeY = set.rows * 100;
 
   return (
-    <div 
+    <div
       className={`sticker ${className}`}
       style={{
         backgroundImage: `url('${set.url}')`,
         backgroundPosition: `${xPos}% ${yPos}%`,
         backgroundSize: `${sizeX}% ${sizeY}%`,
-        ...style
+        ...style,
       }}
       title={`Sticker ${index + 1}`}
     />
@@ -95,82 +110,102 @@ const SpotifyRewind = () => {
       ) : (
         <div className="spotify-card animate-pop-in">
           <div className="spotify-header">2025 WRAPPED</div>
-          
+
           <div className="spotify-content">
             <h3 className="spotify-title">Top Genre</h3>
-            
+
             <div className="spotify-stat-box">
-               <div className="spotify-rank-circle">
-                  <BarChart2 color="black" size={32} />
-               </div>
-               <div className="spotify-rank-number">#1</div>
-               <p className="spotify-stat-text">Arya's Voice Notes</p>
-               <p className="spotify-subtext">Top 0.001% of Listeners</p>
+              <div className="spotify-rank-circle">
+                <BarChart2 color="black" size={32} />
+              </div>
+              <div className="spotify-rank-number">#1</div>
+              <p className="spotify-stat-text">Arya's Voice Notes</p>
+              <p className="spotify-subtext">Top 0.001% of Listeners</p>
             </div>
 
             <div className="spotify-player">
               <Pause fill="white" stroke="none" size={20} />
               <div className="spotify-track-info">
-                 <span>Love and Yap<br></br></span>
-                 <span style={{fontSize:'10px', color:'#b3b3b3'}}><br/>Arya • Mohnish's Phone</span>
+                <span>
+                  Love and Yap<br></br>
+                </span>
+                <span style={{ fontSize: "10px", color: "#b3b3b3" }}>
+                  <br />
+                  Arya • Mohnish's Phone
+                </span>
               </div>
               <div className="spotify-progress-bar">
-                  <div className="spotify-progress-fill"></div>
+                <div className="spotify-progress-fill"></div>
               </div>
             </div>
           </div>
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
 // --- COMPONENT: DELIVERY MODAL ---
 const DeliveryModal = ({ onClose }) => {
-    return (
-        <div className="modal-overlay" onClick={onClose}>
-            <div className="delivery-card animate-pop-in" onClick={e => e.stopPropagation()}>
-                <div className="delivery-header">
-                    <h3><Truck size={24} style={{marginRight:'10px'}}/> Order Tracking</h3>
-                    <button className="close-icon" onClick={onClose}><X size={20}/></button>
-                </div>
-                
-                <div className="delivery-body">
-                    <div className="status-row">
-                        <div className="status-icon"><Package size={20} color="#fff"/></div>
-                        <div className="status-info">
-                            <span className="label">Package Contents</span>
-                            <span className="value">23 Years of Love that cannot be contained</span>
-                        </div>
-                    </div>
-
-                    <div className="status-row">
-                        <div className="status-icon"><Truck size={20} color="#fff"/></div>
-                        <div className="status-info">
-                            <span className="label">Delivery Agent</span>
-                            <span className="value">Mohnish Kumar</span>
-                        </div>
-                    </div>
-
-                    <div className="status-row active">
-                        <div className="status-icon"><CheckCircle size={20} color="#fff"/></div>
-                        <div className="status-info">
-                            <span className="label">Current Status</span>
-                            <span className="value status-text">Shipped</span>
-                        </div>
-                    </div>
-
-                    <div className="delivery-date">
-                        Expected Delivery: <span className="highlight">December 5th</span>
-                    </div>
-                </div>
-
-                <button className="delivery-close-btn" onClick={onClose}>
-                    Awesome!
-                </button>
-            </div>
+  return (
+    <div className="modal-overlay" onClick={onClose}>
+      <div
+        className="delivery-card animate-pop-in"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="delivery-header">
+          <h3>
+            <Truck size={24} style={{ marginRight: "10px" }} /> Order Tracking
+          </h3>
+          <button className="close-icon" onClick={onClose}>
+            <X size={20} />
+          </button>
         </div>
-    );
+
+        <div className="delivery-body">
+          <div className="status-row">
+            <div className="status-icon">
+              <Package size={20} color="#fff" />
+            </div>
+            <div className="status-info">
+              <span className="label">Package Contents</span>
+              <span className="value">
+                22 Years of Love that cannot be contained
+              </span>
+            </div>
+          </div>
+
+          <div className="status-row">
+            <div className="status-icon">
+              <Truck size={20} color="#fff" />
+            </div>
+            <div className="status-info">
+              <span className="label">Delivery Agent</span>
+              <span className="value">Mohnish Kumar</span>
+            </div>
+          </div>
+
+          <div className="status-row active">
+            <div className="status-icon">
+              <CheckCircle size={20} color="#fff" />
+            </div>
+            <div className="status-info">
+              <span className="label">Current Status</span>
+              <span className="value status-text">Shipped</span>
+            </div>
+          </div>
+
+          <div className="delivery-date">
+            Expected Delivery: <span className="highlight">December 5th</span>
+          </div>
+        </div>
+
+        <button className="delivery-close-btn" onClick={onClose}>
+          Awesome!
+        </button>
+      </div>
+    </div>
+  );
 };
 
 // --- COMPONENT: COUNTDOWN ---
@@ -179,15 +214,15 @@ const Countdown = () => {
 
   function calculateTimeLeft() {
     const year = new Date().getFullYear();
-    let target = new Date(year, 11, 5); 
+    let target = new Date(year, 11, 5);
     const now = new Date();
 
     if (now > target) {
-       target = new Date(year + 1, 11, 5);
+      target = new Date(year + 1, 11, 5);
     }
 
     const difference = +target - +now;
-    
+
     if (difference > 0) {
       return {
         days: Math.floor(difference / (1000 * 60 * 60 * 24)),
@@ -195,7 +230,7 @@ const Countdown = () => {
         minutes: Math.floor((difference / 1000 / 60) % 60),
         seconds: Math.floor((difference / 1000) % 60),
       };
-    } 
+    }
     return "BDAY";
   }
 
@@ -216,7 +251,9 @@ const Countdown = () => {
     <div className="countdown-container">
       {Object.entries(timeLeft).map(([unit, value]) => (
         <div key={unit} className="countdown-item">
-          <span className="countdown-number">{value.toString().padStart(2, '0')}</span>
+          <span className="countdown-number">
+            {value.toString().padStart(2, "0")}
+          </span>
           <span className="countdown-label">{unit}</span>
         </div>
       ))}
@@ -229,54 +266,60 @@ const CategoryCard = ({ setKey, config, stickersToDecorate }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className={`category-wrapper ${isOpen ? 'expanded' : ''}`}>
-      {!isOpen && stickersToDecorate.map((stickerIdx, i) => (
-        <div 
-          key={i} 
-          className="floating-sticker-container"
-          style={{
-            top: i % 2 === 0 ? '-15px' : 'auto',
-            bottom: i % 2 !== 0 ? '-15px' : 'auto',
-            left: i < 2 ? '-10px' : 'auto',
-            right: i >= 2 ? '-10px' : 'auto',
-            transform: `rotate(${i % 2 === 0 ? '-10deg' : '10deg'})`
-          }}
-        >
-          <Sticker setKey={setKey} index={stickerIdx} className="float-sticker" />
-        </div>
-      ))}
+    <div className={`category-wrapper ${isOpen ? "expanded" : ""}`}>
+      {!isOpen &&
+        stickersToDecorate.map((stickerIdx, i) => (
+          <div
+            key={i}
+            className="floating-sticker-container"
+            style={{
+              top: i % 2 === 0 ? "-15px" : "auto",
+              bottom: i % 2 !== 0 ? "-15px" : "auto",
+              left: i < 2 ? "-10px" : "auto",
+              right: i >= 2 ? "-10px" : "auto",
+              transform: `rotate(${i % 2 === 0 ? "-10deg" : "10deg"})`,
+            }}
+          >
+            <Sticker
+              setKey={setKey}
+              index={stickerIdx}
+              className="float-sticker"
+            />
+          </div>
+        ))}
 
-      <div 
+      <div
         className="category-card"
-        style={{ 
-            backgroundColor: config.bgColor, 
-            color: config.color,
-            borderColor: isOpen ? config.color : 'transparent'
+        style={{
+          backgroundColor: config.bgColor,
+          color: config.color,
+          borderColor: isOpen ? config.color : "transparent",
         }}
         onClick={() => setIsOpen(!isOpen)}
       >
         <div className="card-header">
-            <div className="card-icon">{config.icon}</div>
-            <h3>{config.title}</h3>
-            <p>{config.desc}</p>
-            
-            <button 
-              className="toggle-btn"
-              style={{ color: config.color }} 
-            >
-                {isOpen ? <ChevronUp size={16}/> : <ChevronDown size={16}/>}
-                <span>{isOpen ? 'Close' : 'View Collection'}</span>
-            </button>
+          <div className="card-icon">{config.icon}</div>
+          <h3>{config.title}</h3>
+          <p>{config.desc}</p>
+
+          <button className="toggle-btn" style={{ color: config.color }}>
+            {isOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+            <span>{isOpen ? "Close" : "View Collection"}</span>
+          </button>
         </div>
 
         {isOpen && (
-           <div className="gallery-grid animate-fade-in">
-             {Array.from({ length: config.count }).map((_, idx) => (
-               <div key={idx} className="gallery-item">
-                 <Sticker setKey={setKey} index={idx} className="gallery-sticker" />
-               </div>
-             ))}
-           </div>
+          <div className="gallery-grid animate-fade-in">
+            {Array.from({ length: config.count }).map((_, idx) => (
+              <div key={idx} className="gallery-item">
+                <Sticker
+                  setKey={setKey}
+                  index={idx}
+                  className="gallery-sticker"
+                />
+              </div>
+            ))}
+          </div>
         )}
       </div>
     </div>
@@ -285,19 +328,29 @@ const CategoryCard = ({ setKey, config, stickersToDecorate }) => {
 
 // --- MAIN APP ---
 export default function App() {
-  const [windowSize, setWindowSize] = useState({ width: window.innerWidth, height: window.innerHeight });
+  const [windowSize, setWindowSize] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
   const [showDelivery, setShowDelivery] = useState(false);
 
   useEffect(() => {
-      const handleResize = () => setWindowSize({ width: window.innerWidth, height: window.innerHeight });
-      window.addEventListener('resize', handleResize);
-      return () => window.removeEventListener('resize', handleResize);
+    const handleResize = () =>
+      setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return (
     <div className="app-root">
-      <Confetti width={windowSize.width} height={windowSize.height} recycle={true} numberOfPieces={100} gravity={0.03} />
-      
+      <Confetti
+        width={windowSize.width}
+        height={windowSize.height}
+        recycle={true}
+        numberOfPieces={100}
+        gravity={0.03}
+      />
+
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Poppins:wght@400;600&display=swap');
 
@@ -464,53 +517,80 @@ export default function App() {
 
       {/* --- MAIN CONTENT WRAPPER --- */}
       <div className="content-container">
-        
         <div className="banner-container">
-            <img src="images/Set 5.png" alt="Header" className="banner-img" />
-            <div className="banner-overlay">
-                <h1 className="main-title">Happy 23rd Birthday Arya!</h1>
-                <p className="subtitle">Counting down to your special day...</p>
-                <Countdown />
-            </div>
+          <img src="images/Set 5.png" alt="Header" className="banner-img" />
+          <div className="banner-overlay">
+            <h1 className="main-title">Happy 22nd Birthday Arya!</h1>
+            <p className="subtitle">Counting down to your special day...</p>
+            <Countdown />
+          </div>
         </div>
 
         <div className="main-grid">
-          <CategoryCard setKey="set1" config={STICKER_SETS.set1} stickersToDecorate={[0, 4, 8, 15]} />
-          <CategoryCard setKey="set2" config={STICKER_SETS.set2} stickersToDecorate={[1, 5, 10, 14]} />
-          <CategoryCard setKey="set3" config={STICKER_SETS.set3} stickersToDecorate={[0, 2, 4]} />
-          <CategoryCard setKey="set4" config={STICKER_SETS.set4} stickersToDecorate={[0, 4, 8]} />
+          <CategoryCard
+            setKey="set1"
+            config={STICKER_SETS.set1}
+            stickersToDecorate={[0, 4, 8, 15]}
+          />
+          <CategoryCard
+            setKey="set2"
+            config={STICKER_SETS.set2}
+            stickersToDecorate={[1, 5, 10, 14]}
+          />
+          <CategoryCard
+            setKey="set3"
+            config={STICKER_SETS.set3}
+            stickersToDecorate={[0, 2, 4]}
+          />
+          <CategoryCard
+            setKey="set4"
+            config={STICKER_SETS.set4}
+            stickersToDecorate={[0, 4, 8]}
+          />
         </div>
 
         {/* --- DELIVERY BUTTON --- */}
         <div className="delivery-cta-section">
-            <button className="delivery-btn" onClick={() => setShowDelivery(true)}>
-                <Package size={20} />
-                Click here to receive the stickers!
-            </button>
+          <button
+            className="delivery-btn"
+            onClick={() => setShowDelivery(true)}
+          >
+            <Package size={20} />
+            Click here to receive the stickers!
+          </button>
         </div>
 
         {/* --- DELIVERY MODAL --- */}
         {showDelivery && (
-            <DeliveryModal onClose={() => setShowDelivery(false)} />
+          <DeliveryModal onClose={() => setShowDelivery(false)} />
         )}
 
         <div className="wish-section">
-            <div style={{display:'flex', justifyContent:'center', marginBottom:'1rem', color:'#ec4899'}}>
-                <Gift size={32} />
-            </div>
-            <div className="wish-text">
-              "To someone who showed me love 23 million times more than anyone could.
-              <br/><br/>
-              <strong>Happy 23rd Birthday!</strong>
-              <br/><br/>
-              Apologies for everything. "
-            </div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              marginBottom: "1rem",
+              color: "#ec4899",
+            }}
+          >
+            <Gift size={32} />
+          </div>
+          <div className="wish-text">
+            "To someone who showed me love 22 million times more than anyone
+            could.
+            <br />
+            <br />
+            <strong>Happy 22nd Birthday!</strong>
+            <br />
+            <br />
+            Apologies for everything. "
+          </div>
         </div>
 
         <SpotifyRewind />
 
         <footer className="footer">Made with ❤️ for Arya</footer>
-
       </div>
     </div>
   );
